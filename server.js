@@ -13,6 +13,11 @@ const fs = require('fs');
 // including handling JSON data
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(function (req, res, next) {
+   res.header("Access-Control-Allow-Origin", "*");
+   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+   next();
+})
 
 // this is where we'll handle our various routes from
 const routes = require('./routes/routes.js')(app, fs);
